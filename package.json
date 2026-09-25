@@ -1,0 +1,19 @@
+{
+  "name": "perfect-cut",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Perfect Cut Android build for Google Play",
+  "scripts": {
+    "sync": "node scripts/sync-www.js && npx cap sync android",
+    "bundle": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/bundle.ps1",
+    "open": "npx cap open android"
+  },
+  "dependencies": {
+    "@capacitor/android": "^8.5.1",
+    "@capacitor/core": "^8.5.1",
+    "@fontsource/orbitron": "^5.2.8"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^8.5.1"
+  }
+}

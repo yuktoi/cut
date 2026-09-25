@@ -1,0 +1,13 @@
+{
+  "appId": "app.perfectcut.android",
+  "appName": "Perfect Cut",
+  "webDir": "www",
+  "backgroundColor": "#000000",
+  "android": {
+    "backgroundColor": "#000000",
+    "allowMixedContent": false
+  },
+  "server": {
+    "androidScheme": "https"
+  }
+}
