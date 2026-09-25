@@ -1,8 +1,8 @@
 {
-  "name": "perfect-cut",
-  "version": "1.0.0",
+  "name": "neon",
+  "version": "1.1.0",
   "private": true,
-  "description": "Perfect Cut Android build for Google Play",
+  "description": "NEON - three neon minigames, Android build for Google Play",
   "scripts": {
     "sync": "node scripts/sync-www.js && npx cap sync android",
     "bundle": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/bundle.ps1",

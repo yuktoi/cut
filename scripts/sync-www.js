@@ -20,10 +20,19 @@ if (!googleFonts.test(html)) {
   process.exit(1);
 }
 
-const files = ['orbitron-latin-500-normal.woff2', 'orbitron-latin-700-normal.woff2', 'orbitron-latin-900-normal.woff2'];
+// Engine plus one module per minigame. Every <script src> in index.html must be listed here.
+const scripts = ['supabase.config.js', 'ranking.js', 'game.js', 'games/cut.js', 'games/rhythm.js', 'games/prism.js'];
+for (const rel of scripts) {
+  if (!html.includes(`src="${rel}"`)) {
+    console.error(`index.html does not load ${rel}. Update scripts/sync-www.js.`);
+    process.exit(1);
+  }
+}
+
+const fonts = ['orbitron-latin-500-normal.woff2', 'orbitron-latin-700-normal.woff2', 'orbitron-latin-900-normal.woff2'];
 const fontSrc = path.join(root, 'node_modules', '@fontsource', 'orbitron', 'files');
 fs.mkdirSync(fontDir, { recursive: true });
-for (const file of files) {
+for (const file of fonts) {
   const from = path.join(fontSrc, file);
   if (!fs.existsSync(from)) {
     console.error('Missing font file: ' + from);
@@ -32,5 +41,16 @@ for (const file of files) {
   fs.copyFileSync(from, path.join(fontDir, file));
 }
 
+for (const rel of scripts) {
+  const from = path.join(root, rel);
+  if (!fs.existsSync(from)) {
+    console.error('Missing script: ' + from);
+    process.exit(1);
+  }
+  const to = path.join(www, rel);
+  fs.mkdirSync(path.dirname(to), { recursive: true });
+  fs.copyFileSync(from, to);
+}
+
 fs.writeFileSync(path.join(www, 'index.html'), html.replace(googleFonts, localFonts));
-console.log('Synced index.html and Orbitron into www/');
+console.log(`Synced index.html, ${scripts.length} scripts and Orbitron into www/`);
